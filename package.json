@@ -4,9 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "client":"npm run start --prefix client",
+    "dev": "concurrently \"npm run start\" \"npm run client\""
   },
   "dependencies": {
+    "concurrently": "^3.5.1",
     "express": "^4.16.2",
     "nodemon": "^1.14.12"
   }
