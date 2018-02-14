@@ -1,6 +1,21 @@
 const mongoose=require('mongoose');
 const {Schema} = mongoose;
 const userSchema=new Schema({
-  facebookId:String
+  local            : {
+    email        : String,
+    password     : String,
+},
+facebook         : {
+    id           : String,
+    token        : String,
+    email        : String,
+    name         : String
+},
+google           : {
+    id           : String,
+    token        : String,
+    email        : String,
+    name         : String
+}
 });
-mongoose.model('login_register', userSchema);
+mongoose.model('user', userSchema);

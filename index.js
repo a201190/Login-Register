@@ -1,3 +1,4 @@
+const url=require('inspector');
 const express=require('express');
 const mongoose=require('mongoose');
 const bodyParser=require('body-parser');
@@ -10,14 +11,8 @@ const app=express();
 const router=express.Router();
 require('./model/user');
 require('./services/facebookPassport');
-const  options = {
-    db: {native_parser: true},
-    server: {poolSize: 5},
-    replset: {rs_name: 'myReplicaSetName'},
-    user: keys.mongoUserName,
-    pass: keys.mongoUserPassword,
-  };
-mongoose.connect(keys.mongooseURI, options);
+require('./services/googlePassport');
+mongoose.connect(keys.mongooseURI);
 app.use(bodyParser.json());
 app.use(
     cookieSession({
@@ -31,5 +26,6 @@ app.use(flash());
 app.set('view engine', 'ejs');
 app.use(cookieParser());
 require('./routes/authRoutes')(app);
+// require('./routes/googleauth')(app);
 const PORT=process.env.PORT || 5000;
 app.listen(PORT);
