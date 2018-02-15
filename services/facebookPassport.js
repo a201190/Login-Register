@@ -1,4 +1,4 @@
-const passport=require('passport')
+const passport=require('passport');
 const FacebookStrategy  = require('passport-facebook');
 const mongoose=require('mongoose');
 const keys=require('../config/keys');

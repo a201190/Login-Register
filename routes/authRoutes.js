@@ -4,13 +4,13 @@ module.exports = (app) => {
     scope: ['public_profile', 'email']
   }));
   app.get('/auth/facebook/callback', passport.authenticate('facebook'), (req, res) => {
-    res.redirect('/');
+    res.redirect('/home');
   });
   app.get('/auth/google', passport.authenticate('google', {
     scope: ['profile', 'email']
   }));
   app.get('/auth/google/callback', passport.authenticate('google'), (req, res) => {
-    res.redirect('/');
+    res.redirect('/home');
   });
   app.get('/api/logout', (req, res) => {
     req.logout();

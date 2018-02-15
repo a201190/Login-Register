@@ -1,20 +1,21 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
-import Login from './Container/login';
+import Registration from './Container/Registration';
 import NavBar from './Container/navbar';
+import Login from './Container/login';
 import {connect} from 'react-redux';
-import * as action from './actions'
+import * as action from './actions';
 class Approuter extends React.Component{
     componentDidMount() {
         this.props.fetchUser();
       }
-    
-    render(){
+    render(){        
         return(
             <div>
                 <NavBar/>
                 <Switch>
-                    <Route to="/" component={Login}/>
+                    <Route exact path="/" component={Registration}/>
+                    <Route exact path="/login" component={Login}/>
                 </Switch>
             </div>
         );

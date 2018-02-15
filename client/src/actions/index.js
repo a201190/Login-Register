@@ -4,7 +4,12 @@ export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user')
   dispatch({type: FETCH_USERS, payload: res.data});
 };
-export const submitSurvey= (values) =>async dispatch=>{
-  const res =await axios.post('/api/', values)
+export const SubmitPersonalDetails= (values, history) =>async dispatch=>{
+  const res =await axios.post('/api/personaldata', values)
+  history.push('/login') 
+  dispatch({type: FETCH_USERS, payload: res.data})
+};
+export const Login= (values) =>async dispatch=>{
+  const res =await axios.post('/api/login', values)
   dispatch({type: FETCH_USERS, payload: res.data})
 };

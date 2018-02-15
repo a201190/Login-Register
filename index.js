@@ -12,6 +12,7 @@ const router=express.Router();
 require('./model/user');
 require('./services/facebookPassport');
 require('./services/googlePassport');
+require('./services/userlogin');
 mongoose.connect(keys.mongooseURI);
 app.use(bodyParser.json());
 app.use(
@@ -26,6 +27,7 @@ app.use(flash());
 app.set('view engine', 'ejs');
 app.use(cookieParser());
 require('./routes/authRoutes')(app);
-// require('./routes/googleauth')(app);
+require('./routes/personalDetail')(app);
+require('./routes/login')(app);
 const PORT=process.env.PORT || 5000;
 app.listen(PORT);

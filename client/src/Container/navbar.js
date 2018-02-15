@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css';
+import {connect} from 'react-redux';
 import {
     Collapse,
     Navbar,
@@ -23,6 +24,24 @@ class NavBar extends React.Component{
           isOpen: !this.state.isOpen
         });
       }
+      renderContent(){
+        switch (this.props.auth) {
+          case null:
+            return;
+          case false:
+            return [
+              <NavItem key="1">
+                <NavLink href="/auth/facebook">Login With Facebook</NavLink>
+             </NavItem>,
+              <NavItem key="2">
+              <NavLink href="/auth/google">Login With Google</NavLink>
+           </NavItem>
+            ];
+          default:
+            return [
+              <NavLink key="3" href="/api/logout">Logout</NavLink>];
+            }
+      }
       render() {
         return (
           <div>
@@ -31,12 +50,7 @@ class NavBar extends React.Component{
               <NavbarToggler onClick={this.toggle} />
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
-                  <NavItem>
-                    <NavLink href="#">Login With Facebook</NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink href="#">Login With Google</NavLink>
-                  </NavItem>
+                  {this.renderContent()}
                 </Nav>
               </Collapse>
             </Navbar>
@@ -44,4 +58,7 @@ class NavBar extends React.Component{
         );
       }
     }
-export default NavBar;
+    function mapStateToProps(state) {
+      return {auth: state.auth}
+    }
+export default connect(mapStateToProps)(NavBar);
