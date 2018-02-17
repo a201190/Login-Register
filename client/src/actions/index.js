@@ -9,7 +9,7 @@ export const SubmitPersonalDetails= (values, history) =>async dispatch=>{
   history.push('/login') 
   dispatch({type: FETCH_USERS, payload: res.data})
 };
-export const Login= (values) =>async dispatch=>{
-  const res =await axios.post('/api/login', values)
+export const Login= () =>async dispatch=>{
+  const res =await axios.get('/api/login')
   dispatch({type: FETCH_USERS, payload: res.data})
 };

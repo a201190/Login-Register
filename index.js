@@ -9,11 +9,13 @@ const  cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const app=express();
 const router=express.Router();
+const path=require('path');
 require('./model/user');
 require('./services/facebookPassport');
 require('./services/googlePassport');
-require('./services/userlogin');
 mongoose.connect(keys.mongooseURI);
+mongoose.connect('mongodb://localhost/loginapp');
+var db=mongoose.connection;
 app.use(bodyParser.json());
 app.use(
     cookieSession({
@@ -24,6 +26,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash()); 
+app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs');
 app.use(cookieParser());
 require('./routes/authRoutes')(app);

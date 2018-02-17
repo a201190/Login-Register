@@ -1,16 +1,18 @@
 const mongoose=require('mongoose');
-const passport=require('passport');
+const keys=require('../config/keys')
 const User=mongoose.model('user');
+var MongoClient = require('mongodb').MongoClient;
 module.exports=(app)=>{
-    app.post('/api/login',passport.authenticate('local'),((req, res)=>{
-        // res.redirect('/login/' + req.user.username);
-        console.log(req.body)
-    }));
-    app.get('/api/current_user', async (req, res)=>{
-        res.send(req.User);
-    })
-  app.get('/api/logout', function(req, res){
-      req.logout();
-      res.redirect('/login');
+  app.get('/api/login',(req, res) =>{
+    MongoClient.connect(keys.mongooseURI, function(err, db) {
+      if (err) throw err;
+      var dbo = db.db("login_register");
+    const p= dbo.collection("users").find({}).toArray(function(err, result){
+        if (err) throw err;
+        var data=result.map((result)=>{return result})
+        db.close();
+        res.send(data);
+      })
+    });
   });
 }

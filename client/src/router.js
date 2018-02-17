@@ -9,6 +9,9 @@ class Approuter extends React.Component{
     componentDidMount() {
         this.props.fetchUser();
       }
+      componentWillMount(){
+          this.props.Login();
+      }
     render(){        
         return(
             <div>
