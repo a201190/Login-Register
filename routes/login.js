@@ -15,4 +15,7 @@ module.exports=(app)=>{
       })
     });
   });
+app.get('/api/logout', (req, res)=>{
+  res.json(req.body)
+})
 }
